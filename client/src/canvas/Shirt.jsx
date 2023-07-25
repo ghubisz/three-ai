@@ -17,9 +17,7 @@ const Shirt = () => {
   const stateString = JSON.stringify(snap);
 
   return (
-    <group
-      key={stateString}
-    >
+    <group key={stateString}>
       <mesh
         castShadow
         geometry={nodes.T_Shirt_male.geometry}
