@@ -18,9 +18,25 @@ const Customizer = () => {
 
   const [ generatingImg, setGeneratingImg] = useState(false);
 
+  const [activeEditorTab, setActiveEditorTab] = useState("");
+
+  const [activeFilterTab, setActiveFilterTab] = useState({
+    logoShirt: true,
+    stylishShirt: false,
+  })
+
   //show tab content depending on the activeTab
   const generateTabContent = (tab) => {
-
+    switch (activeEditorTab) {
+      case "colorpicker":
+        return <ColorPicker />
+      case "filepicker":
+        return <FilePicker />
+      case "aipicker":
+        return <AIPicker />
+      default:
+        return null;
+    }
   }
 
   return (
