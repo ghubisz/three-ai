@@ -52,7 +52,22 @@ const Customizer = () => {
     if(!prompt) return alert("Please enter a prompt");
 
     try {
-      // call our backend to generate an ai image
+      setGeneratingImg(true);
+
+      const response = await fetch('https://localhost:5173/api/v1/dalle', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          prompt,
+        })
+      });
+
+      const data = await response.json();
+
+      handleDecals(type, `data:image/png;base64,${data.photo}`)
+
     } catch (error) {
       alert(error)
     } finally {
@@ -78,10 +93,11 @@ const Customizer = () => {
         break;
       case "stylishShirt":
           state.isFullTexture = !activeFilterTab[tabName];
-    
+        break;
       default:
         state.isFullTexture = true;
         state.isLogoTexture = false;
+        break;
     }
 
     // after setting the state, activeFilterTab is updated
